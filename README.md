@@ -1,94 +1,90 @@
-
-
 # CarouselApp
 
-This project was generated using [Nx](https://nx.dev).
+Application that displays image carousel. By default this will display four blocks that contain image and its description. Number of blocks value is configurable(i.e 3 OR 4), to be passed as prop to [ImageCarousel](./libs/carousel/ui/src/lib/image-carousel/image-carousel.tsx) component
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+`with 4 blocks`:
 
-🔎 **Powerful, Extensible Dev Tools**
+<p float="left">
+<img src="./apps/carousel-app/src/assets/four-block1.png" width="48%">
+<img src="./apps/carousel-app/src/assets/four-block2.png" width="48%">
+</p>
 
-## Adding capabilities to your workspace
+`with 3 blocks`:
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+<p float="left">
+<img src="./apps/carousel-app/src/assets/first.png" width="48%">
+<img src="./apps/carousel-app/src/assets/second.png" width="48%">
+</p>
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+## Installation
 
-Below are our core plugins:
+Navigate to the root directory and install the dependencies
 
-- [React](https://reactjs.org)
-  - `npm install --save-dev @nrwl/react`
-- Web (no framework frontends)
-  - `npm install --save-dev @nrwl/web`
-- [Angular](https://angular.io)
-  - `npm install --save-dev @nrwl/angular`
-- [Nest](https://nestjs.com)
-  - `npm install --save-dev @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `npm install --save-dev @nrwl/express`
-- [Node](https://nodejs.org)
-  - `npm install --save-dev @nrwl/node`
+```
+# Please make sure you have node environment setup. This project uses node v14.14.0
 
-There are also many [community plugins](https://nx.dev/nx-community) you could add.
+cd carousel-app
+yarn install
+```
 
-## Generate an application
+## Project structure
 
-Run `nx g @nrwl/react:app my-app` to generate an application.
+<img src="./tools/app-structure.png">
 
-> You can use any of the plugins above to generate applications as well.
+This app is a monorepo bootstraped using [nx.dev](https://nx.dev) tools.
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+[carousel-app](./apps/carousel-app): contains the carousel application.
 
-## Generate a library
+[api](./apps/api): contains the server that powers the react client.
 
-Run `nx g @nrwl/react:lib my-lib` to generate a library.
+`libs:`
 
-> You can also use any of the plugins above to generate libraries as well.
+[carousel-ui](./libs/carousel/ui): the entire carousel ui is implemented as a library that can be used in any react project.
 
-Libraries are shareable across libraries and applications. They can be imported from `@carousel-app/mylib`.
+[carousel-hooks-util](./libs/carousel/hooks-util): contains reusable hooks that are used in the application. For now it only contains a `useFetch` hook.
+
+[carousel-test-utils](./libs/carousel/test-utils): This exports a mocked api server that is used in integration testing setup.
+
+[api-interfaces](./libs/api-interfaces): contains typescript typings for the api response. This is used by `api` and `client`.
 
 ## Development server
 
-Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+Running `yarn dev` will run `api server` and the `react client` parallelly.
 
-## Code scaffolding
+Navigate to [http://localhost:4200](http://localhost:4200) to see the carousel app. The app will automatically reload if you change any of the source files.
 
-Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
+The backend api is availale at [http://localhost:3333/api/images](http://localhost:3333/api/images)
 
-## Build
+## Running integration tests
 
-Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `yarn test` to execute the integrations tests using [@testing-library/react](https://testing-library.com/docs/react-testing-library/intro/) and [miragejs](https://miragejs.com).
 
-## Running unit tests
+```
+ PASS   carousel-app  apps/carousel-app/src/app/app.spec.tsx
+  App
+    ✓ should render successfully with welcome message (99 ms)
+    ✓ button previous is disabled initially & next enabled (15 ms)
+    ✓ clicking next 2 times disables the next button (25 ms)
+    ✓ clicking next and previous once has previous disabled (23 ms)
 
-Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
-
-Run `nx affected:test` to execute the unit tests affected by a change.
+Test Suites: 1 passed, 1 total
+Tests:       4 passed, 4 total
+Snapshots:   0 total
+Time:        2.959 s, estimated 3 s
+Ran all test suites.
+✨  Done in 5.16s.
+```
 
 ## Running end-to-end tests
 
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
-
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
+Run `yarn e2e` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
 
 ## Understand your workspace
 
-Run `nx dep-graph` to see a diagram of the dependencies of your projects.
+Run `yarn nx dep-graph` to see a diagram of the dependencies of your projects.
 
-## Further help
+## To-Be-Done
 
-Visit the [Nx Documentation](https://nx.dev) to learn more.
-
-
-
-## ☁ Nx Cloud
-
-### Computation Memoization in the Cloud
-
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
-
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.
+- Run the app with `docker-compose`
+- add animations
+- re-render the app when screen size changes

@@ -13,6 +13,9 @@ const response = [
   {
     title: "Test title4", images: [""]
   },
+  {
+    title: "Test title5", images: [""]
+  },
 ]
 
 export function makeServer(environment = "development") {

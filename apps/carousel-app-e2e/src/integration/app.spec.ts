@@ -17,6 +17,7 @@ describe('carousel app workflow', () => {
   it('next button should be disabled when end is reached', () => {
     cy.get('.button').contains('Next').click()
     cy.get('.button').contains('Next').click()
+    cy.get('.button').contains('Next').click()
     cy.get('.button').contains('Previous').should('not.be.disabled')
     cy.get('.button').contains('Next').should('be.disabled')
   });

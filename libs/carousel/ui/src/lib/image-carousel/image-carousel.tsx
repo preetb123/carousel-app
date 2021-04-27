@@ -5,7 +5,6 @@ import './image-carousel.css';
 /* eslint-disable-next-line */
 
 type BlocksNum = 3 | 4;
-
 export interface ImageCarouselProps {
   items: CarouselItemData[];
   blocks?: BlocksNum;
@@ -59,14 +58,13 @@ export const ImageCarousel = ({ items, blocks = 4 }: ImageCarouselProps) => {
   const getBlockData = (position: number) => {
     let title = '';
     let imageUrl = '';
-    if (isThreeBlocks && position === -1) {
-      return { title, imageUrl };
+    if (!(isThreeBlocks && position === -1)) {
+      position = position + (isThreeBlocks ? 0 : 1);
+      title = items[position].title;
+      const images = items[position].images;
+      const randomIndex = Math.floor(Math.random() * images.length);
+      imageUrl = items[position].images[randomIndex];
     }
-    position = position + (isThreeBlocks ? 0 : 1);
-    title = items[position].title;
-    const images = items[position].images;
-    const randomIndex = Math.floor(Math.random() * images.length);
-    imageUrl = items[position].images[randomIndex];
     return { title, imageUrl };
   };
 

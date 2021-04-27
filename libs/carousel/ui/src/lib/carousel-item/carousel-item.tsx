@@ -1,6 +1,5 @@
 import React from 'react';
-import testImage from './test-image.jpg';
-
+import './carousel-item.css';
 /* eslint-disable-next-line */
 export interface CarouselItemProps {
   title?: string;
@@ -20,14 +19,15 @@ export const CarouselItem = React.memo(
       ? {
           boxShadow: shouldHighlight ? '10px 10px 10px #888888' : null,
           margin: 24,
+          zIndex: 10,
         }
       : { margin: 8 };
 
     return (
-      <div className="block">
+      <div className={shouldHighlight ? 'block highlight' : 'block'}>
         <img
           style={styles}
-          src={testImage}
+          src={imageUrl}
           alt={title}
           width={size}
           height={size}

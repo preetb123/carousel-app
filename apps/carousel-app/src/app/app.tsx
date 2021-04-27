@@ -20,7 +20,7 @@ export const App = () => {
       <h1 style={{ position: 'absolute', top: 24 }}>
         Welcome to Carousel App!
       </h1>
-      <ImageCarousel items={result} />
+      <ImageCarousel items={result} blocks={4} />
     </div>
   );
 };
