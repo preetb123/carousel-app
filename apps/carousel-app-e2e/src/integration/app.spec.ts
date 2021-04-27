@@ -1,13 +1,23 @@
-import { getGreeting } from '../support/app.po';
-
-describe('carousel-app', () => {
-  beforeEach(() => cy.visit('/'));
+describe('carousel app workflow', () => {
+  beforeEach(() => {
+    cy.intercept("/api/images", { fixture: "images.json" }).as('images')
+    cy.visit('/')
+    cy.get('div').contains('Loading...');
+    cy.wait('@images')
+  });
 
   it('should display welcome message', () => {
-    // Custom command example, see `../support/commands.ts` file
-    cy.login('my-email@something.com', 'myPassword');
+    cy.get('h1').contains('Welcome to Carousel App!');
+  });
 
-    // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome to carousel-app!');
+  it('previous button is disabled initially', () => {
+    cy.get('.button').contains('Previous').should('be.disabled')
+  });
+
+  it('next button should be disabled when end is reached', () => {
+    cy.get('.button').contains('Next').click()
+    cy.get('.button').contains('Next').click()
+    cy.get('.button').contains('Previous').should('not.be.disabled')
+    cy.get('.button').contains('Next').should('be.disabled')
   });
 });

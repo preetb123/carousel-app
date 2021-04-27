@@ -7,6 +7,7 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "resolveJsonModule": true,
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
@@ -15,7 +16,14 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@carousel-app/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@carousel-app/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@carousel-app/carousel/ui": ["libs/carousel/ui/src/index.ts"],
+      "@carousel-app/carousel/hooks-util": [
+        "libs/carousel/hooks-util/src/index.ts"
+      ],
+      "@carousel-app/carousel/test-utils": [
+        "libs/carousel/test-utils/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

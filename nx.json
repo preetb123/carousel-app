@@ -1,36 +1,26 @@
 {
   "implicitDependencies": {
-    "package.json": {
-      "dependencies": "*",
-      "devDependencies": "*"
-    },
+    "package.json": { "dependencies": "*", "devDependencies": "*" },
     ".eslintrc.json": "*"
   },
-  "affected": {
-    "defaultBase": "master"
-  },
+  "affected": { "defaultBase": "master" },
   "npmScope": "carousel-app",
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
-      }
+      "options": { "cacheableOperations": ["build", "lint", "test", "e2e"] }
     }
   },
   "projects": {
-    "carousel-app": {
-      "tags": []
-    },
+    "carousel-app": { "tags": [] },
     "carousel-app-e2e": {
       "tags": [],
       "implicitDependencies": ["carousel-app"]
     },
-    "api": {
-      "tags": []
-    },
-    "api-interfaces": {
-      "tags": []
-    }
+    "api": { "tags": [] },
+    "api-interfaces": { "tags": [] },
+    "carousel-ui": { "tags": [] },
+    "carousel-hooks-util": { "tags": [] },
+    "carousel-test-utils": { "tags": [] }
   }
 }

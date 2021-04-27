@@ -1,23 +1,12 @@
 {
   "version": 2,
-  "cli": {
-    "defaultCollection": "@nrwl/react"
-  },
+  "cli": { "defaultCollection": "@nrwl/react" },
   "defaultProject": "carousel-app",
   "generators": {
     "@nrwl/react": {
-      "application": {
-        "style": "css",
-        "linter": "eslint",
-        "babel": true
-      },
-      "component": {
-        "style": "css"
-      },
-      "library": {
-        "style": "css",
-        "linter": "eslint"
-      }
+      "application": { "style": "css", "linter": "eslint", "babel": true },
+      "component": { "style": "css" },
+      "library": { "style": "css", "linter": "eslint" }
     }
   },
   "projects": {
@@ -75,9 +64,7 @@
             "proxyConfig": "apps/carousel-app/proxy.conf.json"
           },
           "configurations": {
-            "production": {
-              "buildTarget": "carousel-app:build:production"
-            }
+            "production": { "buildTarget": "carousel-app:build:production" }
           }
         },
         "lint": {
@@ -109,9 +96,7 @@
             "devServerTarget": "carousel-app:serve"
           },
           "configurations": {
-            "production": {
-              "devServerTarget": "carousel-app:serve:production"
-            }
+            "production": { "devServerTarget": "carousel-app:serve:production" }
           }
         },
         "lint": {
@@ -152,15 +137,11 @@
         },
         "serve": {
           "executor": "@nrwl/node:execute",
-          "options": {
-            "buildTarget": "api:build"
-          }
+          "options": { "buildTarget": "api:build" }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/api/**/*.ts"]
-          }
+          "options": { "lintFilePatterns": ["apps/api/**/*.ts"] }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -179,8 +160,71 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
+          "options": { "lintFilePatterns": ["libs/api-interfaces/**/*.ts"] }
+        }
+      }
+    },
+    "carousel-ui": {
+      "root": "libs/carousel/ui",
+      "sourceRoot": "libs/carousel/ui/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
+            "lintFilePatterns": ["libs/carousel/ui/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/carousel/ui"],
+          "options": {
+            "jestConfig": "libs/carousel/ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "carousel-hooks-util": {
+      "root": "libs/carousel/hooks-util",
+      "sourceRoot": "libs/carousel/hooks-util/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/carousel/hooks-util/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/carousel/hooks-util"],
+          "options": {
+            "jestConfig": "libs/carousel/hooks-util/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "carousel-test-utils": {
+      "root": "libs/carousel/test-utils",
+      "sourceRoot": "libs/carousel/test-utils/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/carousel/test-utils/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/carousel/test-utils"],
+          "options": {
+            "jestConfig": "libs/carousel/test-utils/jest.config.js",
+            "passWithNoTests": true
           }
         }
       }

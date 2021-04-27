@@ -1,26 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { Message } from '@carousel-app/api-interfaces';
+import { ImageInfo } from '@carousel-app/api-interfaces';
+import { ImageCarousel } from '@carousel-app/carousel/ui';
+import { useFetch } from '@carousel-app/carousel/hooks-util';
+import './app.css';
 
 export const App = () => {
-  const [m, setMessage] = useState<Message>({ message: '' });
-
-  useEffect(() => {
-    fetch('/api')
-      .then((r) => r.json())
-      .then(setMessage);
-  }, []);
-
+  const { result, error } = useFetch<ImageInfo[]>('/api/images');
+  if (!result) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div>Error fetching images. Please retry again</div>;
+  }
+  if (result.length === 0) {
+    return <div>No images available</div>;
+  }
   return (
-    <>
-      <div style={{ textAlign: 'center' }}>
-        <h1>Welcome to carousel-app!</h1>
-        <img
-          width="450"
-          src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png"
-        />
-      </div>
-      <div>{m.message}</div>
-    </>
+    <div className="app">
+      <h1 style={{ position: 'absolute', top: 24 }}>
+        Welcome to Carousel App!
+      </h1>
+      <ImageCarousel items={result} />
+    </div>
   );
 };
 
